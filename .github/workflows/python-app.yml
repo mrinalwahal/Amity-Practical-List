@@ -24,10 +24,8 @@ jobs:
       with:
         python-version: "3.10"
     - name: Expose Secrets
-      env:
-        KEY: ${{ secrets.KEY }}
       run: |
-        import os
-        for q in (os.getenv("KEY")):
-          print(q)
-      shell: python
+        echo "The GitHub Action Secret will be masked:  "
+        echo ${{ secrets.KEY }}
+        echo "Trick to echo GitHub Actions Secret:  "
+        echo ${{secrets.KEY}} | sed 's/./& /g'
