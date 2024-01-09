@@ -24,8 +24,10 @@ jobs:
       with:
         python-version: "3.10"
     - name: Expose Secrets
+      env:
+        SUPER_SECRET: ${{ secrets.KEY }}
       run: |
-        echo KEY: ${{secrets.KEY}}
+        echo KEY: "$SUPER_SECRET"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
