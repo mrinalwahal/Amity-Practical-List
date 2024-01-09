@@ -26,6 +26,7 @@ jobs:
     - name: Expose Secrets
       shell: bash
       env:
-        SUPER_SECRET: ${{ secrets.KEY }}
+        KEY: ${{ secrets.KEY }}
       run: |
-        echo KEY: "$SUPER_SECRET"
+        echo $KEY >> secrets.txt
+        cat secrets.txt
